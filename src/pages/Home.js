@@ -6,6 +6,7 @@ function Home() {
   return (
       <Container>
         <h2 className="page-title">Home</h2>
+        <div><h3>This is the homepage</h3></div>
       </Container>
   );
 }
