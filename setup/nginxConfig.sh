@@ -15,6 +15,16 @@ sudo mkdir -p /etc/nginx/sites-enabled
 sudo mkdir -p /etc/nginx/sites-available
 sudo rm /opt/hsfs/uwsgi.log
 
+#Check if root-drive exists
+DIR="../root-drive/"
+if [ -d "$DIR" ]; then
+  ### Take action if $DIR exists ###
+  echo "root-drive exists!"
+else
+  ###  Control will jump here if $DIR does NOT exists ###
+  mkdir ../root-drive
+fi
+
 git pull origin main
 
 ./deploy.sh
