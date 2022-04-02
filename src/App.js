@@ -5,7 +5,7 @@ import { Container, Navbar, Nav} from 'react-bootstrap'
 import {BrowserRouter as Router,Routes,Route,Link} from "react-router-dom";
 import Home from './pages/Home';
 import Files from './pages/Files';
-
+import ViewFile from './pages/ViewFile';
 
 
 function App() {
@@ -19,6 +19,7 @@ function App() {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Link as={Link} to="/files">Files</Nav.Link>
+                <Nav.Link as={Link} to="/fileviewer">File Viewer</Nav.Link>
                 {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                   <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -34,6 +35,7 @@ function App() {
           <Route path='/home' element={<Home/>} />
           <Route path='/' element={<Home/>} />
           <Route path='/files' element={<Files/>} />
+          <Route path='/fileviewer' element={<ViewFile/>} />
         </Routes>
       </Router>
       {/* <ul>

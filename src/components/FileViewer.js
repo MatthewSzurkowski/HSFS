@@ -7,30 +7,59 @@ import 'font-awesome/css/font-awesome.min.css';
 
 import FileBrowser, {Icons} from 'react-keyed-file-browser'
 
+const api = axios.create({
+  baseURL: '/api/'
+});
+
+
 class NestedEditableDemo extends React.Component {
-  state = {
-    files: []
+  constructor(props) {
+    super(props);
+    this.state = {
+        isFetching: false,
+        files: []
+    };
   }
 
-//   componentDidMount() {
-//     axios.get(`http://localhost:3001/fileInfo`)
-//       .then(res => {
-//         const files = res.data;
-//         this.setState({ files });
-//       })
-//   }
+  updateFiles = async (e) =>{
+    try {
+      this.setState({...this.state, isFetching: true});
+      const response = await api.get('/fileInfo');
+      this.setState({...this.state, files: response.data});
+      this.setState({...this.state, isFetching: false});
+  } catch (e) {
+      console.log(e);
+      this.setState({...this.state, isFetching: false});
+    }
+  }
 
-//   componentWillUnmount() {
+  // findDegree = async (e) =>{
+  //   let tempData = await api.get(
+  //       '/fileInfo');
+  //   console.log(tempData.data.files);
+  // }
+
+  componentDidMount() {
+    this.updateFiles();
+    this.timer = setInterval(() => this.updateFiles(), 3600000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    this.timer = null;
+}
+
+  // componentWillUnmount() {
     
-//     location.reload();
+  //   window.location.reload();
    
-//   }
+  // }
 
   formatTime(secs) {
     let hours   = Math.floor(secs / 3600);
     let minutes = Math.floor(secs / 60) % 60;
     let seconds = secs % 60;
-    this.forceUpdate();
+    window.location.reload();
     return [hours, minutes, seconds]
         .map(v => ('' + v).padStart(2, '0'))
         .filter((v,i) => v !== '00' || i > 0)
@@ -38,28 +67,19 @@ class NestedEditableDemo extends React.Component {
   }
 
 
-  handleCreateFolder = (key) => {
+  handleCreateFolder = async (key) => {
     // Ensures that no other folders can be made at the root level
     const folderToCreate = { folderName: key};
-    var hold = key;
-    hold = hold.split('/');
-    console.log(hold);
-    if (hold.length==2){
-      return;
-    }
     this.setState(state => {
       state.files = state.files.concat([{
         key: key,
       }])
 
-      axios.post(`http://localhost:3001/createFolder`, folderToCreate)
-      .then(res => {
-        console.log(res.data);
-      })
+      api.post(`/createFolder`, folderToCreate);
       window.location.reload();
       return state
     })
-    this.forceUpdate();
+    window.location.reload();
   }
 
   handleCreateFiles = (files, prefix) => {
@@ -92,7 +112,7 @@ class NestedEditableDemo extends React.Component {
       state.files = state.files.concat(uniqueNewFiles)
       return state
     })
-    this.forceUpdate();
+    window.location.reload();
   }
 
   handleRenameFolder = (oldKey, newKey) => {
@@ -112,7 +132,7 @@ class NestedEditableDemo extends React.Component {
       state.files = newFiles
       return state
     })
-    this.forceUpdate();
+    window.location.reload();
   }
   handleRenameFile = (oldKey, newKey) => {
     this.setState(state => {
@@ -131,7 +151,7 @@ class NestedEditableDemo extends React.Component {
       state.files = newFiles
       return state
     })
-    this.forceUpdate();
+    window.location.reload();
   }
   handleDeleteFolder = (folderKey) => {
     this.setState(state => {
@@ -142,14 +162,11 @@ class NestedEditableDemo extends React.Component {
         }
       })
       state.files = newFiles
-      const folderToRemove = { fileToRemove: folderKey};
-      axios.post(`http://localhost:3001/deleteFolder`, folderToRemove)
-      .then(res => {
-        console.log(res.data);
-      })
+      const folderToRemove = { folderToRemove: folderKey};
+      api.post(`/deleteFolder`, folderToRemove)
       return state
     })
-    this.forceUpdate();
+    window.location.reload();
   }
   handleDeleteFile = (fileKey) => {
     this.setState(state => {
@@ -161,13 +178,10 @@ class NestedEditableDemo extends React.Component {
       })
       state.files = newFiles
       const fileToRemove = { fileToRemove: fileKey};
-      axios.post(`http://localhost:3001/deleteMarkdown`, fileToRemove)
-      .then(res => {
-        console.log(res.data);
-      })
+      api.post(`/deleteFile`, fileToRemove)
       return state
     })
-    this.forceUpdate();
+    window.location.reload();
   }
 
   render() {
@@ -188,6 +202,7 @@ class NestedEditableDemo extends React.Component {
         onDeleteFile={this.handleDeleteFile}
       />
       </center>
+      <p>{this.state.isFetching ? 'Fetching data...' : ''}</p>
       </div>
 
     )

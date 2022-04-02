@@ -11,6 +11,8 @@
 # production
 /build
 package-lock.json
+/root-drive/.*
+__pycache__/
 
 # misc
 .DS_Store
