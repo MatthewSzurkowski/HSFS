@@ -22,7 +22,7 @@ class FileUpload extends React.Component{
         this.setState({...this.state, foldername: value});
     }
 
-    uploadFiles(e){
+    uploadFiles = async (e) =>{
         e.preventDefault();
 
         const formData = new FormData();
@@ -38,7 +38,7 @@ class FileUpload extends React.Component{
         };
         console.log(requestOptions);
 
-        fetch("/api/upload", requestOptions).then(
+        await fetch("/api/upload", requestOptions).then(
             (response) => {
                 console.log(response.data);
             }

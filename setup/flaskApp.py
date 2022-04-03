@@ -1,6 +1,6 @@
 from sre_constants import SUCCESS
 from flask import Flask, jsonify, send_file
-from flask import request
+from flask import request, send_file
 import json
 import os
 import subprocess
@@ -192,6 +192,15 @@ def getFileInfo():
     # f = request.files['file']
     # f.save(secure_filename(f.filename))
 
+@app.route('/root-drive/<path:path>')
+def sendFile(path):
+    print(path)
+    if (path[0]!='/'):
+        path = ('/' + path)
+    try:
+        return send_file(('../root-drive' + path))
+    except Exception as e:
+        return str(e)
 
 
 

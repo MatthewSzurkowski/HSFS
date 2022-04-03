@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
-import ReactDOM from 'react-dom'
-import Moment from 'moment'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Moment from 'moment';
 import axios from "axios";
 
 import 'font-awesome/css/font-awesome.min.css';
@@ -12,7 +12,7 @@ const api = axios.create({
 });
 
 
-class NestedEditableDemo extends React.Component {
+class MyFileViewer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -209,4 +209,4 @@ class NestedEditableDemo extends React.Component {
   }
 }
 
-export default NestedEditableDemo;
+export default MyFileViewer;

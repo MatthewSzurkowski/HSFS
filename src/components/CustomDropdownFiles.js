@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from "axios";
-import { wait } from '@testing-library/user-event/dist/utils';
 const api = axios.create({
     baseURL: '/api/'
   });
