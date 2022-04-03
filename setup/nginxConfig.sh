@@ -1,4 +1,9 @@
 #!/bin/bash
+
+#Install nginx
+sudo apt update
+sudo apt install nginx
+
 sudo pkill -f uwsgi -9
 sudo apt-get update
 sudo apt-get install -y nginx openssl
