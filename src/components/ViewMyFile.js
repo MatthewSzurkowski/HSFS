@@ -17,7 +17,6 @@ class ViewMyFile extends Component{
 
     handleChange = async (filename) => {
         this.state.fileUrl = filename;
-        console.log(this.filename);
         this.forceUpdate();
       };
 
@@ -29,10 +28,8 @@ class ViewMyFile extends Component{
         const officeFileExts = ["pptx", "pdf", "docx"];
 
         if(this.state.fileUrl!==""){
-            console.log(this.state.fileUrl)
             let ext = this.state.fileUrl.split('.');
             ext = ext[ext.length-1];
-            console.log(ext)
             // element=<a href={this.state.fileUrl}>LinkedIn handle</a>;
             let rootPath = "http://149.248.54.130/api/root-drive/" + this.state.fileUrl;
             if (photoExts.includes(ext)){
