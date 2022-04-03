@@ -26,12 +26,14 @@ class ViewMyFile extends Component{
         const audioExts = ["mp3", "webm", "wav", "m4a", "ogg", "3gp", "flac"];
         const videoExts = ["mp4", "webm", "ogv"];
         const officeFileExts = ["pptx", "pdf", "docx"];
-
+        let holdBaseURL = window.location.href;
+        holdBaseURL = (holdBaseURL.split("/"));
+        holdBaseURL = (holdBaseURL[0] + "//" + holdBaseURL[2]);
         if(this.state.fileUrl!==""){
             let ext = this.state.fileUrl.split('.');
             ext = ext[ext.length-1];
             // element=<a href={this.state.fileUrl}>LinkedIn handle</a>;
-            let rootPath = "http://149.248.54.130/api/root-drive/" + this.state.fileUrl;
+            let rootPath =  (holdBaseURL + "/api/root-drive/" + this.state.fileUrl);
             if (photoExts.includes(ext)){
                 element = <img src={rootPath} width="50%" height="50%"></img>
             }

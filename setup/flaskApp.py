@@ -202,6 +202,20 @@ def sendFile(path):
     except Exception as e:
         return str(e)
 
+@app.route('/favicon')
+def sendFav():
+    try:
+        return send_file(('../public/favicon.ico'))
+    except Exception as e:
+        return str(e)
+
+@app.route('/applefav')
+def sendAppleFav():
+    try:
+        return send_file(('../public/logo192.png'))
+    except Exception as e:
+        return str(e)
+
 
 
 
