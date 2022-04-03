@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#If apache2 proxy is default, stop it
+sudo service apache2 stop
+
 #Install nginx
 sudo apt-get update
 sudo apt-get install nginx
