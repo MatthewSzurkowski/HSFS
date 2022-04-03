@@ -36,6 +36,9 @@ else
   mkdir ../root-drive
 fi
 
+#Save git credentials
+git config --global credential.helper store
+
 git pull origin main
 
 ./deploy.sh
