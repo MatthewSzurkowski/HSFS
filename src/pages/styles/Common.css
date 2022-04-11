@@ -1,4 +1,17 @@
+body {
+    font-family: Georgia, serif;
+  }
+
 .page-title{
     margin-top: 5%;
     text-align: center;
+}
+
+.homepage-img-container{
+    text-align: center;
+    margin-top: 5%;
+}
+
+.homepage-img-container > img{
+    width: 20%;
 }

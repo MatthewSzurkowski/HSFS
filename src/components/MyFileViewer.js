@@ -2,10 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Moment from 'moment';
 import axios from "axios";
+import { Container } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import 'font-awesome/css/font-awesome.min.css';
 
-import FileBrowser, {Icons} from 'react-keyed-file-browser'
+import FileBrowser, {Icons} from 'react-keyed-file-browser';
+
+import "./styles/MyFileViewer.css";
 
 const api = axios.create({
   baseURL: '/api/'
@@ -129,6 +133,8 @@ class MyFileViewer extends React.Component {
           newFiles.push(file)
         }
       })
+      const fileRename = { old: oldKey, new: newKey};
+      api.post(`/fileRename`, fileRename);
       state.files = newFiles
       return state
     })
@@ -148,6 +154,8 @@ class MyFileViewer extends React.Component {
           newFiles.push(file)
         }
       })
+      const fileRename = { old: oldKey, new: newKey};
+      api.post(`/fileRename`, fileRename);
       state.files = newFiles
       return state
     })
@@ -187,22 +195,22 @@ class MyFileViewer extends React.Component {
   render() {
     return (
         <div>
-          <center>
-      <FileBrowser
-        files={this.state.files}
-        icons={Icons.FontAwesome(4)}
+          <div className="container_patch">
+            <FileBrowser
+              files={this.state.files}
+              icons={Icons.FontAwesome(4)}
 
-        onCreateFolder={this.handleCreateFolder}
-        onCreateFiles={this.handleCreateFiles}
-        onMoveFolder={this.handleRenameFolder}
-        onMoveFile={this.handleRenameFile}
-        // onRenameFolder={this.handleRenameFolder}
-        // onRenameFile={this.handleRenameFile}
-        onDeleteFolder={this.handleDeleteFolder}
-        onDeleteFile={this.handleDeleteFile}
-      />
-      </center>
-      <p>{this.state.isFetching ? 'Fetching data...' : ''}</p>
+              onCreateFolder={this.handleCreateFolder}
+              onCreateFiles={this.handleCreateFiles}
+              onMoveFolder={this.handleRenameFolder}
+              onMoveFile={this.handleRenameFile}
+              onRenameFolder={this.handleRenameFolder}
+              onRenameFile={this.handleRenameFile}
+              onDeleteFolder={this.handleDeleteFolder}
+              onDeleteFile={this.handleDeleteFile}
+            />
+          </div>
+          <p>{this.state.isFetching ? 'Fetching data...' : ''}</p>
       </div>
 
     )

@@ -216,6 +216,27 @@ def sendAppleFav():
     except Exception as e:
         return str(e)
 
+@app.route('/fileRename', methods = ['POST'])
+def fileRename():
+    try:
+        json_data = json.loads(str(request.data, encoding='utf-8'))
+        old = json_data["old"]
+        new = json_data["new"]
+        
+        # print("Old:" + old)
+        # print("New:" + new)
+
+        root_base = "../root-drive"
+
+        new = (root_base + '/' + new)
+        old = (root_base + '/' + old)
+        os.rename(old, new)
+        return jsonify(success='true')
+    except:
+        print("Error in fileRename")
+        return jsonify(success='false')
+
+
 
 
 

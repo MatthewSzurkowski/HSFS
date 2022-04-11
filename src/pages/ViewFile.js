@@ -8,7 +8,6 @@ function ViewFile() {
   return (
       <Container>
         <h2 className="page-title">View Files</h2>
-        <div><h3>View Files!</h3></div>
         <ViewMyFile/>
       </Container>
   );

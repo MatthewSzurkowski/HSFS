@@ -1,0 +1,32 @@
+.file_container{
+    align-items: center;
+    align-self: center;
+    border: 5px outset #000;
+    flex: 1 0 21%;
+    flex-direction: column;
+    height: 50%;
+    margin: 2%;
+    text-align: center;
+    width: 50%;
+
+    border-radius: 15%;
+    padding: 2%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    transition: 0.3s;
+}
+
+.file_container:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  }
+
+.fixed-image{
+    border-radius: 5%;
+}
+
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .file_container{
+        flex: 0 1 90%;
+    }
+  }

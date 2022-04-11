@@ -5,8 +5,10 @@ import "./styles/Common.css";
 function Home() {
   return (
       <Container>
-        <h2 className="page-title">Home</h2>
-        <div><h3>This is the homepage</h3></div>
+        <h1 className="page-title">Home</h1>
+        <div className='homepage-img-container'>
+          <img src="https://i.imgur.com/agdn9rn.png"/>
+        </div>
       </Container>
   );
 }

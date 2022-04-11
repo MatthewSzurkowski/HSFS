@@ -1,0 +1,6 @@
+.container_patch{
+    text-align: center !important;
+    overflow-wrap: anywhere !important;
+    inline-size: 100% !important;
+    word-wrap: break-word;
+}
