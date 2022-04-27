@@ -1,7 +1,7 @@
 server{
     listen 80 default_server;
     server_name hsfs;
-    client_max_body_size 150M;
+    client_max_body_size 950M;
 
     location / {
         #root /opt/deb/www;
